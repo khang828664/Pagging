@@ -3,113 +3,75 @@ import logo from './logo.svg';
 import './App.css';
 import Pagination from 'react-bootstrap/Pagination'
 import PageItem from 'react-bootstrap/PageItem'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/Dropdown'
+import Select from 'react-select'
 import Table from 'react-bootstrap/Table'
+import isEmpty  from 'lodash'
+
 const DATA = [
   {
-  "Name":"khang",
-  "Des" :"Luu Hoang Khang",
+  "name":"1",
+  "des" :"Luu Hoang Khang",
   "code":"12312312",
   },
   {
-    "Name":"khang",
-    "Des" :"Luu Hoang Khang",
+    "name":"khang",
+    "des" :"Luu Hoang Khang",
     "code":"12312312",
   },
   {
-    "Name":"khang",
-    "Des" :"Luu Hoang Khang",
+    "name":"khang",
+    "des" :"Luu Hoang Khang",
     "code":"12312312",
   },
   {
-    "Name":"khang",
-    "Des" :"Luu Hoang Khang",
+    "name":"khang",
+    "des" :"Luu Hoang Khang",
     "code":"12312312",
   },
   {
-    "Name":"khang",
-    "Des" :"Luu Hoang Khang",
+    "name":"khang",
+    "des" :"Luu Hoang Khang",
     "code":"12312312",
   },
   {
-    "Name":"khang",
-    "Des" :"Luu Hoang Khang",
+    "name":"khang",
+    "des" :"Luu Hoang Khang",
     "code":"12312312",
   },
   {
-    "Name":"khang",
-    "Des" :"Luu Hoang Khang",
+    "name":"khang",
+    "des" :"Luu Hoang Khang",
     "code":"12312312",
     },
     {
-      "Name":"khang",
-      "Des" :"Luu Hoang Khang",
+      "name":"khang",
+      "des" :"Luu Hoang Khang",
       "code":"12312312",
     },
     {
-      "Name":"khang",
-      "Des" :"Luu Hoang Khang",
+      "name":"khang",
+      "des" :"Luu Hoang Khang",
       "code":"12312312",
     },
-    {
-      "Name":"khang",
-      "Des" :"Luu Hoang Khang",
-      "code":"12312312",
-    },
-    {
-      "Name":"khang",
-      "Des" :"Luu Hoang Khang",
-      "code":"12312312",
-    },
-    {
-      "Name":"khang",
-      "Des" :"Luu Hoang Khang",
-      "code":"12312312",
-    },
-    {
-      "Name":"khang",
-      "Des" :"Luu Hoang Khang",
-      "code":"12312312",
-      },
-      {
-        "Name":"khang",
-        "Des" :"Luu Hoang Khang",
-        "code":"12312312",
-      },
-      {
-        "Name":"khang",
-        "Des" :"Luu Hoang Khang",
-        "code":"12312312",
-      },
-      {
-        "Name":"khang",
-        "Des" :"Luu Hoang Khang",
-        "code":"12312312",
-      },
-      {
-        "Name":"khang",
-        "Des" :"Luu Hoang Khang",
-        "code":"12312312",
-      },
-      {
-        "Name":"khang",
-        "Des" :"Luu Hoang Khang",
-        "code":"12312312",
-      },
   
 ]
 const LISTGETBY = [10,20,30,40]
 function App({data, listgetBy}) {
   const [listData, setListData ] = useState(DATA)
   const [currentPage, setCurrentPage] = useState(0)
-  const [listDataCurrentPage, setListDataCurrentPage]=([])
-  const [getBy, setGetPage] = useState([3])
+  const [listDataCurrentPage, setListDataCurrentPage]= useState([])
+  const [listPage , setListPage] =  useState([[]])
+  const [getBy, setGetPage] = useState(3)
   useEffect(() => {
-    console.log(listData)
-    pushDataCurrentPage()
+    // pagging()
+    setUpFirstPage(currentPage, getBy)
     return () => {
-      
+    }
+  }, [])
+  useEffect(() => {
+     console.log("userEffect2 chay")
+     pushCurrentPage(currentPage, getBy)
+    return () => {     
     }
   }, [currentPage])
   const RenderItem =()=> {
@@ -134,16 +96,75 @@ function App({data, listgetBy}) {
     setCurrentPage(index)
     console.log("setPage")
   }
-  const pushDataCurrentPage = currentPage=>{
-  
-  }
+  // const pagging = () =>{
+  //   console.log("page")
+  //   let pageMax = listData.length/getBy
+  //   let listItem = [[]]
+  //   for (let index = 0 ; index < pageMax; index++) 
+  //   {
+  //            listItem[index] =[]
+  //       for (let indexJ = 0 ; indexJ < getBy ; indexJ++ ) {
+            
+  //           listItem[index].push(listData[indexJ])
+  //       }
+  //       console.log(listItem[index])
+  //   }
+  //   setListPage(listItem)
+  //   console.log("affter paging  " + listItem)
+
+  // }
+    const pushCurrentPage = (currentPage, getBy) => {
+      let listItem = []      
+      let startCut = getBy*currentPage
+      let endCut =  getBy*currentPage + getBy
+            for (let index = startCut ; index < endCut ; index++ )
+              {
+                listItem.push(listData[index])
+                console.log(listData[index])
+              }
+          setListDataCurrentPage(listItem)
+          console.log(listItem)
+    } 
+    const setUpFirstPage = getBy => {
+      let listItem = []
+      for(let index = 0; index < getBy ; index++ )
+      { 
+        console.log("mang chay")
+        listItem.push(listData[index])
+      }
+       setListDataCurrentPage(listItem)
+    }
   return (
-    <div className="App">
-     <DropdownButton id="dropdown-item-button" title="Dropdown button">
-      <Dropdown.Item as="button">Action</Dropdown.Item>
-      <Dropdown.Item as="button">Another action</Dropdown.Item>
-     <Dropdown.Item as="button">Something else</Dropdown.Item>
-    </DropdownButton> 
+ <div className="App">
+      <Table striped bordered hover>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Ten </th>
+      <th>des</th>
+      <th>code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <td>2</td>
+      <td>{(!isEmpty(listData[0])?listData[0].name.trim:"")}</td>
+      <td>{currentPage}</td>
+      <td>{currentPage}</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td colSpan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</Table>
     <Pagination size = "lg">
     <PageItem onClick={()=>setCurrentPage(currentPage-1)}>Trang trước</PageItem>
     <Pagination>

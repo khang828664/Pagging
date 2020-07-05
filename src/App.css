@@ -2,8 +2,8 @@
   text-align: center;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  flex-direction: row;  
+  justify-content: space-between;
 }
 
 .App-logo {
@@ -40,17 +40,9 @@
     transform: rotate(360deg);
   }
 }
-.buttomPre {
-  justify-content: center;
-  align-self: center;
-  align-items: center;
-  border: solid;
-  border-width: thin;
-  height: 60px; 
-  padding-top: 15px;
-}
-.buttomPre span {
-  color: blue;
-  text-align: center;
-  margin: 20px;
+.basic-single
+{
+  height: 30px;
+  width: 1000x;
+  
 }
