@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/lodash": "^4.14.157",
+    "@types/react-dom": "^16.9.8",
+    "bootstrap": "^4.5.0",
     "cra-template": "1.0.3",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
-    "react-select": "^3.1.0"
+    "react-select": "^3.1.0",
+    "typescript": "^3.9.6"
   },
   "scripts": {
     "start": "react-scripts start",
